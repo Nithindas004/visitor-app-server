@@ -1,6 +1,8 @@
 const express = require("express")
 const securityModel = require("../models/securityModel")
 const bcrypt = require("bcryptjs")
+const addAppointmentModel= require("../models/addAppointmentModel")
+
 
 const router= express.Router()
 
@@ -29,6 +31,13 @@ router.post("/addsecurity",async(req,res)=>{
 router.get("/viewsec",async(req,res)=>{
     let data= await securityModel.find()
     res.json(data)
+})
+
+router.get("/viewapp",async(req,res)=>{
+    let result=await addAppointmentModel.find()
+    .populate("secid","secname secphone -_id")
+    .exec()
+    res.json(result)
 })
 
 

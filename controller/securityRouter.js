@@ -1,6 +1,7 @@
 const express= require("express")
 const securityModel= require("../models/securityModel")
 const bcrypt=require("bcryptjs")
+const addAppointmentModel= require("../models/addAppointmentModel")
 
 
 const router=express.Router()
@@ -30,6 +31,17 @@ router.post("/seclogin",async(req,res)=>{
     res.json(
         {
             status:"success","userdata":data
+        }
+    )
+})
+
+router.post("/addappointment",async(req,res)=>{
+    let input = req.body
+    let appointment=new addAppointmentModel(input)
+    let result= await appointment.save()
+    res.json(
+        {
+            status:"success"
         }
     )
 })
