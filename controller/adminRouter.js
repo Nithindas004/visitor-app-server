@@ -26,5 +26,10 @@ router.post("/addsecurity",async(req,res)=>{
     )
 })
 
+router.get("/viewsec",async(req,res)=>{
+    let data= await securityModel.find()
+    res.json(data)
+})
+
 
 module.exports=router
